@@ -21,6 +21,18 @@
             box-shadow: 0 0 30px rgba(0,0,0,0.1);
             min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* App Container */
+        .app-container {
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+        
+        .app-container.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
         
         /* Header Styles */
@@ -61,6 +73,11 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .user-profile:hover {
+            background-color: rgba(255,255,255,0.3);
         }
         
         .search-bar {
@@ -83,6 +100,23 @@
         
         .search-bar input::placeholder {
             color: rgba(255,255,255,0.7);
+        }
+        
+        /* Notification Badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
         }
         
         /* Navigation */
@@ -109,6 +143,8 @@
             font-size: 12px;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
+            padding: 5px;
         }
         
         .nav-item.active {
@@ -120,9 +156,14 @@
             margin-bottom: 5px;
         }
         
+        .nav-item:hover {
+            color: #4a6ee0;
+        }
+        
         /* Main Content */
         .main-content {
             padding: 20px 15px 80px;
+            min-height: calc(100vh - 130px);
         }
         
         .section-title {
@@ -139,6 +180,12 @@
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .see-all:hover {
+            color: #3a5ed0;
+            text-decoration: underline;
         }
         
         /* Dashboard Stats */
@@ -156,6 +203,13 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             display: flex;
             align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
         
         .stat-icon {
@@ -274,6 +328,11 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .test-card:hover {
+            transform: translateX(5px);
         }
         
         .test-info h3 {
@@ -337,7 +396,7 @@
         .quiz-progress-bar {
             height: 100%;
             background-color: #4a6ee0;
-            width: 30%;
+            width: 10%;
             border-radius: 4px;
             transition: width 0.5s;
         }
@@ -397,6 +456,7 @@
             cursor: pointer;
             border: none;
             font-size: 16px;
+            transition: all 0.3s;
         }
         
         .quiz-prev {
@@ -404,9 +464,17 @@
             color: #333;
         }
         
+        .quiz-prev:hover {
+            background-color: #e8ecf4;
+        }
+        
         .quiz-next {
             background-color: #4a6ee0;
             color: white;
+        }
+        
+        .quiz-next:hover {
+            background-color: #3a5ed0;
         }
         
         /* Results Screen */
@@ -423,13 +491,13 @@
             text-align: center;
             max-width: 500px;
             margin: 0 auto;
+            overflow-y: auto;
         }
         
         .results-icon {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4ecdc4, #44a08d);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -486,6 +554,7 @@
             cursor: pointer;
             border: none;
             font-size: 16px;
+            transition: all 0.3s;
         }
         
         .review-btn {
@@ -493,14 +562,32 @@
             color: #333;
         }
         
+        .review-btn:hover {
+            background-color: #e8ecf4;
+        }
+        
         .home-btn {
             background-color: #4a6ee0;
             color: white;
         }
         
+        .home-btn:hover {
+            background-color: #3a5ed0;
+        }
+        
         /* Profile Screen */
         .profile-screen, .study-screen, .progress-screen {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            z-index: 150;
+            max-width: 500px;
+            margin: 0 auto;
+            overflow-y: auto;
         }
         
         .profile-header {
@@ -602,11 +689,12 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .study-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
         
         .study-card i {
@@ -683,6 +771,12 @@
             padding: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .detail-card:hover {
+            transform: translateY(-5px);
         }
         
         .detail-value {
@@ -696,9 +790,233 @@
             font-size: 14px;
             color: #777;
         }
+        
+        /* Flashcard Screen */
+        .flashcard-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            z-index: 200;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .flashcard {
+            width: 100%;
+            height: 350px;
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
+        
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .flashcard-front {
+            background: linear-gradient(135deg, #4a6ee0, #6a11cb);
+            color: white;
+        }
+        
+        .flashcard-back {
+            background-color: white;
+            color: #333;
+            transform: rotateY(180deg);
+            border: 2px solid #f0f0f0;
+        }
+        
+        .flashcard-category {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .flashcard-term {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .flashcard-hint {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+        
+        .flashcard-definition {
+            font-size: 22px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .flashcard-example {
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+            margin-top: 20px;
+        }
+        
+        .flashcard-actions {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .flashcard-btn {
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .flashcard-again {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .flashcard-again:hover {
+            background-color: #ff5252;
+        }
+        
+        .flashcard-flip {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .flashcard-flip:hover {
+            background-color: #e8ecf4;
+        }
+        
+        .flashcard-next {
+            background-color: #4ecdc4;
+            color: white;
+        }
+        
+        .flashcard-next:hover {
+            background-color: #3ebcb4;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4a6ee0;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            transform: translateX(150%);
+            transition: transform 0.5s;
+            max-width: 300px;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.9);
+            z-index: 400;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4a6ee0;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 500px) {
+            .stats-container, .subjects-container, .study-cards, .progress-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .quiz-question {
+                font-size: 20px;
+            }
+            
+            .flashcard-term {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Action completed successfully!</span>
+    </div>
+    
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <p>Loading content...</p>
+    </div>
+    
     <!-- Main App Dashboard -->
     <div class="app-container" id="appContainer">
         <!-- Header -->
@@ -710,6 +1028,7 @@
                 </div>
                 <div class="user-profile" id="profileButton">
                     <i class="fas fa-user"></i>
+                    <div class="notification-badge">3</div>
                 </div>
             </div>
             
@@ -725,7 +1044,7 @@
             
             <!-- Stats Overview -->
             <div class="stats-container">
-                <div class="stat-card">
+                <div class="stat-card" id="statStudyHours">
                     <div class="stat-icon stat-1">
                         <i class="fas fa-clock"></i>
                     </div>
@@ -735,7 +1054,7 @@
                     </div>
                 </div>
                 
-                <div class="stat-card">
+                <div class="stat-card" id="statAvgScore">
                     <div class="stat-icon stat-2">
                         <i class="fas fa-check-circle"></i>
                     </div>
@@ -745,7 +1064,7 @@
                     </div>
                 </div>
                 
-                <div class="stat-card">
+                <div class="stat-card" id="statTopics">
                     <div class="stat-icon stat-3">
                         <i class="fas fa-book"></i>
                     </div>
@@ -755,7 +1074,7 @@
                     </div>
                 </div>
                 
-                <div class="stat-card">
+                <div class="stat-card" id="statStreak">
                     <div class="stat-icon stat-4">
                         <i class="fas fa-fire"></i>
                     </div>
@@ -773,7 +1092,7 @@
             </div>
             
             <div class="subjects-container">
-                <div class="subject-card" data-subject="math">
+                <div class="subject-card" data-subject="math" id="mathSubject">
                     <div class="subject-icon math">
                         <i class="fas fa-calculator"></i>
                     </div>
@@ -781,7 +1100,7 @@
                     <div class="subject-progress">24/30 topics mastered</div>
                 </div>
                 
-                <div class="subject-card" data-subject="science">
+                <div class="subject-card" data-subject="science" id="scienceSubject">
                     <div class="subject-icon science">
                         <i class="fas fa-flask"></i>
                     </div>
@@ -789,7 +1108,7 @@
                     <div class="subject-progress">18/28 topics mastered</div>
                 </div>
                 
-                <div class="subject-card" data-subject="english">
+                <div class="subject-card" data-subject="english" id="englishSubject">
                     <div class="subject-icon english">
                         <i class="fas fa-book-open"></i>
                     </div>
@@ -797,7 +1116,7 @@
                     <div class="subject-progress">22/25 topics mastered</div>
                 </div>
                 
-                <div class="subject-card" data-subject="history">
+                <div class="subject-card" data-subject="history" id="historySubject">
                     <div class="subject-icon history">
                         <i class="fas fa-landmark"></i>
                     </div>
@@ -828,24 +1147,55 @@
                     </div>
                     <button class="test-action" id="startScienceTest">Start</button>
                 </div>
+                
+                <div class="test-card" id="englishTest">
+                    <div class="test-info">
+                        <h3>English - Grammar & Composition</h3>
+                        <p>20 questions • 30 minutes • Difficulty: Medium</p>
+                    </div>
+                    <button class="test-action" id="startEnglishTest">Start</button>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="section-title">
+                Quick Actions
+            </div>
+            
+            <div class="subjects-container">
+                <div class="subject-card" id="quickFlashcards">
+                    <div class="subject-icon math">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="subject-name">Flashcards</div>
+                    <div class="subject-progress">Review 50 cards</div>
+                </div>
+                
+                <div class="subject-card" id="quickProgress">
+                    <div class="subject-icon science">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="subject-name">Progress Report</div>
+                    <div class="subject-progress">View your stats</div>
+                </div>
             </div>
         </main>
         
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
-            <div class="nav-item active" data-screen="dashboard">
+            <div class="nav-item active" data-screen="dashboard" id="navDashboard">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </div>
-            <div class="nav-item" data-screen="study">
+            <div class="nav-item" data-screen="study" id="navStudy">
                 <i class="fas fa-book"></i>
                 <span>Study</span>
             </div>
-            <div class="nav-item" data-screen="progress">
+            <div class="nav-item" data-screen="progress" id="navProgress">
                 <i class="fas fa-chart-line"></i>
                 <span>Progress</span>
             </div>
-            <div class="nav-item" data-screen="profile">
+            <div class="nav-item" data-screen="profile" id="navProfile">
                 <i class="fas fa-user"></i>
                 <span>Profile</span>
             </div>
@@ -857,9 +1207,9 @@
         <div class="quiz-header">
             <div class="logo">
                 <i class="fas fa-graduation-cap"></i>
-                <span>Mathematics Test</span>
+                <span id="quizSubject">Mathematics Test</span>
             </div>
-            <div style="font-weight: 600; color: #4a6ee0;">Question 3/10</div>
+            <div style="font-weight: 600; color: #4a6ee0;" id="quizCounter">Question 1/10</div>
         </div>
         
         <div class="quiz-progress">
@@ -867,14 +1217,11 @@
         </div>
         
         <div class="quiz-question" id="quizQuestion">
-            If 2x + 5 = 15, what is the value of x?
+            Loading question...
         </div>
         
         <div class="quiz-options" id="quizOptions">
-            <div class="quiz-option" data-option="A">x = 3</div>
-            <div class="quiz-option" data-option="B">x = 5</div>
-            <div class="quiz-option" data-option="C">x = 7</div>
-            <div class="quiz-option" data-option="D">x = 10</div>
+            <!-- Options will be populated by JavaScript -->
         </div>
         
         <div class="quiz-actions">
@@ -885,12 +1232,12 @@
     
     <!-- Results Screen -->
     <div class="results-screen" id="resultsScreen">
-        <div class="results-icon">
+        <div class="results-icon" id="resultsIcon">
             <i class="fas fa-trophy"></i>
         </div>
         
         <div class="results-score" id="finalScore">85%</div>
-        <div class="results-text">Great job! You passed the test.</div>
+        <div class="results-text" id="resultsText">Great job! You passed the test.</div>
         
         <div class="results-stats">
             <div class="result-stat">
@@ -975,11 +1322,26 @@
                     <div class="menu-text">Achievements</div>
                     <i class="fas fa-chevron-right" style="color: #ccc;"></i>
                 </div>
+                <div class="menu-item" id="notifications">
+                    <div class="menu-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="menu-text">Notifications</div>
+                    <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    <span class="notification-badge">3</span>
+                </div>
                 <div class="menu-item" id="settings">
                     <div class="menu-icon">
                         <i class="fas fa-cog"></i>
                     </div>
                     <div class="menu-text">Settings</div>
+                    <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                </div>
+                <div class="menu-item" id="helpSupport">
+                    <div class="menu-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="menu-text">Help & Support</div>
                     <i class="fas fa-chevron-right" style="color: #ccc;"></i>
                 </div>
                 <div class="menu-item" id="logout">
@@ -1043,7 +1405,7 @@
             </div>
             
             <div class="practice-tests">
-                <div class="test-card">
+                <div class="test-card" id="recentAlgebra">
                     <div class="test-info">
                         <h3>Algebra Basics</h3>
                         <p>Studied 2 hours ago • 15 flashcards reviewed</p>
@@ -1051,7 +1413,7 @@
                     <button class="test-action">Continue</button>
                 </div>
                 
-                <div class="test-card">
+                <div class="test-card" id="recentBiology">
                     <div class="test-info">
                         <h3>Biology: Cell Structure</h3>
                         <p>Studied yesterday • 87% mastery achieved</p>
@@ -1089,19 +1451,19 @@
             </div>
             
             <div class="progress-details">
-                <div class="detail-card">
+                <div class="detail-card" id="detailTopics">
                     <div class="detail-value">156</div>
                     <div class="detail-label">Topics Studied</div>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card" id="detailHours">
                     <div class="detail-value">42</div>
                     <div class="detail-label">Study Hours</div>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card" id="detailTests">
                     <div class="detail-value">24</div>
                     <div class="detail-label">Tests Completed</div>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card" id="detailStreak">
                     <div class="detail-value">14</div>
                     <div class="detail-label">Day Streak</div>
                 </div>
@@ -1112,7 +1474,7 @@
             </div>
             
             <div class="subjects-container">
-                <div class="subject-card">
+                <div class="subject-card" id="progressMath">
                     <div class="subject-icon math">
                         <i class="fas fa-calculator"></i>
                     </div>
@@ -1120,7 +1482,7 @@
                     <div class="subject-progress">80% mastery</div>
                 </div>
                 
-                <div class="subject-card">
+                <div class="subject-card" id="progressScience">
                     <div class="subject-icon science">
                         <i class="fas fa-flask"></i>
                     </div>
@@ -1128,7 +1490,7 @@
                     <div class="subject-progress">75% mastery</div>
                 </div>
                 
-                <div class="subject-card">
+                <div class="subject-card" id="progressEnglish">
                     <div class="subject-icon english">
                         <i class="fas fa-book-open"></i>
                     </div>
@@ -1136,7 +1498,7 @@
                     <div class="subject-progress">85% mastery</div>
                 </div>
                 
-                <div class="subject-card">
+                <div class="subject-card" id="progressHistory">
                     <div class="subject-icon history">
                         <i class="fas fa-landmark"></i>
                     </div>
@@ -1146,88 +1508,343 @@
             </div>
         </main>
     </div>
+    
+    <!-- Flashcard Screen -->
+    <div class="flashcard-screen" id="flashcardScreen">
+        <div class="flashcard" id="flashcard">
+            <div class="flashcard-inner">
+                <div class="flashcard-front">
+                    <div class="flashcard-category" id="flashcardCategory">Mathematics</div>
+                    <div class="flashcard-term" id="flashcardTerm">Quadratic Equation</div>
+                    <div class="flashcard-hint">Click to flip the card</div>
+                </div>
+                <div class="flashcard-back">
+                    <div class="flashcard-definition" id="flashcardDefinition">
+                        A quadratic equation is any equation that can be rearranged in the form ax² + bx + c = 0, where a, b, and c are constants and a ≠ 0.
+                    </div>
+                    <div class="flashcard-example" id="flashcardExample">
+                        Example: x² - 5x + 6 = 0
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flashcard-actions">
+            <button class="flashcard-btn flashcard-again" id="flashcardAgain">Again</button>
+            <button class="flashcard-btn flashcard-flip" id="flashcardFlip">Flip Card</button>
+            <button class="flashcard-btn flashcard-next" id="flashcardNext">Next</button>
+        </div>
+    </div>
 
     <script>
-        // DOM Elements
-        const appContainer = document.getElementById('appContainer');
-        const quizScreen = document.getElementById('quizScreen');
-        const resultsScreen = document.getElementById('resultsScreen');
-        const profileScreen = document.getElementById('profileScreen');
-        const studyScreen = document.getElementById('studyScreen');
-        const progressScreen = document.getElementById('progressScreen');
-        
-        // Navigation Elements
-        const navItems = document.querySelectorAll('.nav-item');
-        const profileButton = document.getElementById('profileButton');
-        const backFromProfile = document.getElementById('backFromProfile');
-        const backFromStudy = document.getElementById('backFromStudy');
-        const backFromProgress = document.getElementById('backFromProgress');
-        
-        // Quiz Elements
-        const startMathTest = document.getElementById('startMathTest');
-        const startScienceTest = document.getElementById('startScienceTest');
-        const quizOptions = document.querySelectorAll('.quiz-option');
-        const quizPrev = document.getElementById('quizPrev');
-        const quizNext = document.getElementById('quizNext');
-        const quizProgressBar = document.getElementById('quizProgressBar');
-        
-        // Results Elements
-        const reviewTest = document.getElementById('reviewTest');
-        const resultsHome = document.getElementById('resultsHome');
-        const finalScore = document.getElementById('finalScore');
-        const correctAnswers = document.getElementById('correctAnswers');
-        const totalQuestions = document.getElementById('totalQuestions');
-        
-        // Study Screen Elements
-        const studyCards = document.querySelectorAll('.study-card');
-        
-        // Profile Menu Elements
-        const menuItems = document.querySelectorAll('.menu-item');
-        
-        // Search Functionality
-        const searchInput = document.getElementById('searchInput');
-        
-        // Quiz State
-        let currentQuestion = 1;
-        let selectedOption = null;
-        let correctAnswer = "B"; // For the sample question
-        let userAnswers = [];
-        let quizScore = 0;
-        
-        // Navigation Functions
+        // ========== APP STATE & DATA ==========
+        const appState = {
+            currentScreen: 'dashboard',
+            currentUser: {
+                name: 'Alex Johnson',
+                stats: {
+                    studyHours: 42,
+                    avgScore: 87,
+                    topicsCovered: 156,
+                    dayStreak: 14,
+                    overallMastery: 78
+                }
+            },
+            quiz: {
+                currentQuestion: 0,
+                score: 0,
+                subject: '',
+                questions: [],
+                userAnswers: [],
+                startTime: null
+            },
+            flashcards: {
+                currentIndex: 0,
+                cards: [
+                    {
+                        category: 'Mathematics',
+                        term: 'Quadratic Equation',
+                        definition: 'A quadratic equation is any equation that can be rearranged in the form ax² + bx + c = 0, where a, b, and c are constants and a ≠ 0.',
+                        example: 'Example: x² - 5x + 6 = 0'
+                    },
+                    {
+                        category: 'Science',
+                        term: 'Photosynthesis',
+                        definition: 'The process by which green plants and some other organisms use sunlight to synthesize foods from carbon dioxide and water.',
+                        example: '6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂'
+                    },
+                    {
+                        category: 'English',
+                        term: 'Metaphor',
+                        definition: 'A figure of speech that describes an object or action in a way that isn’t literally true, but helps explain an idea or make a comparison.',
+                        example: '"Time is a thief."'
+                    },
+                    {
+                        category: 'History',
+                        term: 'Renaissance',
+                        definition: 'The cultural rebirth that occurred in Europe from roughly the 14th through the 17th centuries, based on the rediscovery of classical philosophy, literature, and art.',
+                        example: 'Leonardo da Vinci and Michelangelo were key figures of the Renaissance.'
+                    }
+                ]
+            }
+        };
+
+        // Quiz question data
+        const quizData = {
+            math: [
+                {
+                    question: "If 2x + 5 = 15, what is the value of x?",
+                    options: ["x = 3", "x = 5", "x = 7", "x = 10"],
+                    correct: 1
+                },
+                {
+                    question: "What is the square root of 144?",
+                    options: ["10", "11", "12", "13"],
+                    correct: 2
+                },
+                {
+                    question: "Solve for y: 3y - 7 = 20",
+                    options: ["y = 7", "y = 8", "y = 9", "y = 10"],
+                    correct: 2
+                },
+                {
+                    question: "What is 15% of 200?",
+                    options: ["15", "20", "30", "45"],
+                    correct: 2
+                },
+                {
+                    question: "Simplify: (2x²)(3x³)",
+                    options: ["5x⁵", "6x⁵", "6x⁶", "5x⁶"],
+                    correct: 1
+                }
+            ],
+            science: [
+                {
+                    question: "What is the chemical symbol for gold?",
+                    options: ["Go", "Gd", "Au", "Ag"],
+                    correct: 2
+                },
+                {
+                    question: "Which planet is known as the Red Planet?",
+                    options: ["Venus", "Mars", "Jupiter", "Saturn"],
+                    correct: 1
+                },
+                {
+                    question: "What is the powerhouse of the cell?",
+                    options: ["Nucleus", "Mitochondria", "Ribosome", "Golgi Apparatus"],
+                    correct: 1
+                },
+                {
+                    question: "What is H₂O commonly known as?",
+                    options: ["Hydrogen Peroxide", "Water", "Hydrochloric Acid", "Oxygen"],
+                    correct: 1
+                },
+                {
+                    question: "Which gas do plants absorb during photosynthesis?",
+                    options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+                    correct: 2
+                }
+            ],
+            english: [
+                {
+                    question: "Which of these is a synonym for 'happy'?",
+                    options: ["Sad", "Joyful", "Angry", "Tired"],
+                    correct: 1
+                },
+                {
+                    question: "What is the past tense of 'run'?",
+                    options: ["Running", "Ran", "Runned", "Run"],
+                    correct: 1
+                },
+                {
+                    question: "Which sentence is grammatically correct?",
+                    options: [
+                        "She don't like apples.",
+                        "She doesn't like apples.",
+                        "She not like apples.",
+                        "She no like apples."
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "What is the literary term for giving human qualities to non-human things?",
+                    options: ["Metaphor", "Simile", "Personification", "Hyperbole"],
+                    correct: 2
+                },
+                {
+                    question: "Which word is spelled correctly?",
+                    options: ["Recieve", "Receive", "Recieve", "Receve"],
+                    correct: 1
+                }
+            ]
+        };
+
+        // ========== DOM ELEMENTS ==========
+        const elements = {
+            // Screens
+            appContainer: document.getElementById('appContainer'),
+            quizScreen: document.getElementById('quizScreen'),
+            resultsScreen: document.getElementById('resultsScreen'),
+            profileScreen: document.getElementById('profileScreen'),
+            studyScreen: document.getElementById('studyScreen'),
+            progressScreen: document.getElementById('progressScreen'),
+            flashcardScreen: document.getElementById('flashcardScreen'),
+            
+            // Navigation
+            navItems: document.querySelectorAll('.nav-item'),
+            profileButton: document.getElementById('profileButton'),
+            backFromProfile: document.getElementById('backFromProfile'),
+            backFromStudy: document.getElementById('backFromStudy'),
+            backFromProgress: document.getElementById('backFromProgress'),
+            
+            // Dashboard elements
+            statCards: document.querySelectorAll('.stat-card'),
+            subjectCards: document.querySelectorAll('.subject-card'),
+            seeAllSubjects: document.getElementById('seeAllSubjects'),
+            seeAllTests: document.getElementById('seeAllTests'),
+            
+            // Test buttons
+            startMathTest: document.getElementById('startMathTest'),
+            startScienceTest: document.getElementById('startScienceTest'),
+            startEnglishTest: document.getElementById('startEnglishTest'),
+            
+            // Quick actions
+            quickFlashcards: document.getElementById('quickFlashcards'),
+            quickProgress: document.getElementById('quickProgress'),
+            
+            // Quiz elements
+            quizSubject: document.getElementById('quizSubject'),
+            quizCounter: document.getElementById('quizCounter'),
+            quizProgressBar: document.getElementById('quizProgressBar'),
+            quizQuestion: document.getElementById('quizQuestion'),
+            quizOptions: document.getElementById('quizOptions'),
+            quizPrev: document.getElementById('quizPrev'),
+            quizNext: document.getElementById('quizNext'),
+            
+            // Results elements
+            resultsIcon: document.getElementById('resultsIcon'),
+            finalScore: document.getElementById('finalScore'),
+            resultsText: document.getElementById('resultsText'),
+            correctAnswers: document.getElementById('correctAnswers'),
+            totalQuestions: document.getElementById('totalQuestions'),
+            timeSpent: document.getElementById('timeSpent'),
+            reviewTest: document.getElementById('reviewTest'),
+            resultsHome: document.getElementById('resultsHome'),
+            
+            // Study screen elements
+            studyCards: document.querySelectorAll('.study-card'),
+            recentAlgebra: document.getElementById('recentAlgebra'),
+            recentBiology: document.getElementById('recentBiology'),
+            
+            // Flashcard elements
+            flashcard: document.getElementById('flashcard'),
+            flashcardCategory: document.getElementById('flashcardCategory'),
+            flashcardTerm: document.getElementById('flashcardTerm'),
+            flashcardDefinition: document.getElementById('flashcardDefinition'),
+            flashcardExample: document.getElementById('flashcardExample'),
+            flashcardAgain: document.getElementById('flashcardAgain'),
+            flashcardFlip: document.getElementById('flashcardFlip'),
+            flashcardNext: document.getElementById('flashcardNext'),
+            
+            // Profile menu items
+            editProfile: document.getElementById('editProfile'),
+            studyHistory: document.getElementById('studyHistory'),
+            achievements: document.getElementById('achievements'),
+            notifications: document.getElementById('notifications'),
+            settings: document.getElementById('settings'),
+            helpSupport: document.getElementById('helpSupport'),
+            logout: document.getElementById('logout'),
+            
+            // Utility
+            toast: document.getElementById('toast'),
+            toastMessage: document.getElementById('toastMessage'),
+            loadingSpinner: document.getElementById('loadingSpinner'),
+            searchInput: document.getElementById('searchInput')
+        };
+
+        // ========== UTILITY FUNCTIONS ==========
+        function showToast(message, type = 'info') {
+            elements.toastMessage.textContent = message;
+            
+            // Set color based on type
+            if (type === 'success') {
+                elements.toast.style.backgroundColor = '#4ecdc4';
+                elements.toast.querySelector('i').className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                elements.toast.style.backgroundColor = '#ff6b6b';
+                elements.toast.querySelector('i').className = 'fas fa-exclamation-circle';
+            } else {
+                elements.toast.style.backgroundColor = '#4a6ee0';
+                elements.toast.querySelector('i').className = 'fas fa-info-circle';
+            }
+            
+            elements.toast.classList.add('show');
+            
+            setTimeout(() => {
+                elements.toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function showLoading() {
+            elements.loadingSpinner.style.display = 'flex';
+        }
+
+        function hideLoading() {
+            elements.loadingSpinner.style.display = 'none';
+        }
+
+        function simulateLoading(callback, duration = 1000) {
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                if (callback) callback();
+            }, duration);
+        }
+
+        // ========== SCREEN MANAGEMENT ==========
         function showScreen(screen) {
             // Hide all screens
-            appContainer.style.display = 'none';
-            quizScreen.style.display = 'none';
-            resultsScreen.style.display = 'none';
-            profileScreen.style.display = 'none';
-            studyScreen.style.display = 'none';
-            progressScreen.style.display = 'none';
+            elements.appContainer.style.display = 'none';
+            elements.quizScreen.style.display = 'none';
+            elements.resultsScreen.style.display = 'none';
+            elements.profileScreen.style.display = 'none';
+            elements.studyScreen.style.display = 'none';
+            elements.progressScreen.style.display = 'none';
+            elements.flashcardScreen.style.display = 'none';
+            
+            // Update app state
+            appState.currentScreen = screen;
             
             // Show the requested screen
             switch(screen) {
                 case 'dashboard':
-                    appContainer.style.display = 'block';
+                    elements.appContainer.style.display = 'block';
+                    updateDashboardStats();
                     break;
                 case 'quiz':
-                    quizScreen.style.display = 'block';
+                    elements.quizScreen.style.display = 'block';
                     break;
                 case 'results':
-                    resultsScreen.style.display = 'block';
+                    elements.resultsScreen.style.display = 'block';
                     break;
                 case 'profile':
-                    profileScreen.style.display = 'block';
+                    elements.profileScreen.style.display = 'block';
                     break;
                 case 'study':
-                    studyScreen.style.display = 'block';
+                    elements.studyScreen.style.display = 'block';
                     break;
                 case 'progress':
-                    progressScreen.style.display = 'block';
+                    elements.progressScreen.style.display = 'block';
+                    updateProgressScreen();
+                    break;
+                case 'flashcards':
+                    elements.flashcardScreen.style.display = 'flex';
+                    updateFlashcard();
                     break;
             }
             
             // Update navigation highlighting
-            navItems.forEach(item => {
+            elements.navItems.forEach(item => {
                 if (item.getAttribute('data-screen') === screen) {
                     item.classList.add('active');
                 } else {
@@ -1235,273 +1852,514 @@
                 }
             });
         }
-        
-        // Initialize navigation
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const screen = item.getAttribute('data-screen');
-                showScreen(screen);
-            });
-        });
-        
-        // Profile button click
-        profileButton.addEventListener('click', () => {
-            showScreen('profile');
-        });
-        
-        // Back buttons
-        backFromProfile.addEventListener('click', () => {
-            showScreen('dashboard');
-        });
-        
-        backFromStudy.addEventListener('click', () => {
-            showScreen('dashboard');
-        });
-        
-        backFromProgress.addEventListener('click', () => {
-            showScreen('dashboard');
-        });
-        
-        // Start test buttons
-        startMathTest.addEventListener('click', () => {
-            startQuiz('Mathematics');
-        });
-        
-        startScienceTest.addEventListener('click', () => {
-            startQuiz('Science');
-        });
-        
+
+        function updateDashboardStats() {
+            // Update stat cards with current user data
+            document.querySelector('#statStudyHours .stat-value').textContent = appState.currentUser.stats.studyHours;
+            document.querySelector('#statAvgScore .stat-value').textContent = `${appState.currentUser.stats.avgScore}%`;
+            document.querySelector('#statTopics .stat-value').textContent = appState.currentUser.stats.topicsCovered;
+            document.querySelector('#statStreak .stat-value').textContent = appState.currentUser.stats.dayStreak;
+        }
+
+        function updateProgressScreen() {
+            // Update progress screen with current data
+            document.querySelector('.chart-score').textContent = `${appState.currentUser.stats.overallMastery}%`;
+        }
+
+        // ========== QUIZ FUNCTIONS ==========
         function startQuiz(subject) {
-            // Reset quiz state
-            currentQuestion = 1;
-            selectedOption = null;
-            userAnswers = [];
-            quizScore = 0;
+            // Initialize quiz state
+            appState.quiz.currentQuestion = 0;
+            appState.quiz.score = 0;
+            appState.quiz.subject = subject;
+            appState.quiz.questions = [...quizData[subject]];
+            appState.quiz.userAnswers = [];
+            appState.quiz.startTime = new Date();
             
-            // Update quiz header
-            document.querySelector('.quiz-header .logo span').textContent = `${subject} Test`;
+            // Set quiz subject in UI
+            elements.quizSubject.textContent = `${subject.charAt(0).toUpperCase() + subject.slice(1)} Test`;
             
-            // Reset progress bar
-            quizProgressBar.style.width = '10%';
-            
-            // Reset question and options
-            resetQuizOptions();
+            // Load first question
+            loadQuizQuestion();
             
             // Show quiz screen
             showScreen('quiz');
         }
-        
-        // Quiz option selection
-        quizOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove selection from all options
-                quizOptions.forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                
-                // Add selection to clicked option
-                this.classList.add('selected');
-                selectedOption = this.getAttribute('data-option');
-            });
-        });
-        
-        // Quiz navigation
-        quizNext.addEventListener('click', () => {
-            if (!selectedOption) {
-                alert('Please select an answer before proceeding.');
-                return;
-            }
+
+        function loadQuizQuestion() {
+            const questionData = appState.quiz.questions[appState.quiz.currentQuestion];
             
-            // Check if answer is correct
-            const isCorrect = selectedOption === correctAnswer;
+            // Update question counter
+            elements.quizCounter.textContent = `Question ${appState.quiz.currentQuestion + 1}/${appState.quiz.questions.length}`;
+            
+            // Update progress bar
+            const progressPercentage = ((appState.quiz.currentQuestion + 1) / appState.quiz.questions.length) * 100;
+            elements.quizProgressBar.style.width = `${progressPercentage}%`;
+            
+            // Set question text
+            elements.quizQuestion.textContent = questionData.question;
+            
+            // Clear previous options
+            elements.quizOptions.innerHTML = '';
+            
+            // Create new options
+            questionData.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+                
+                // Check if user already answered this question
+                const userAnswer = appState.quiz.userAnswers[appState.quiz.currentQuestion];
+                if (userAnswer) {
+                    if (index === userAnswer.selected) {
+                        optionElement.classList.add('selected');
+                        if (userAnswer.correct) {
+                            optionElement.classList.add('correct');
+                        } else {
+                            optionElement.classList.add('incorrect');
+                        }
+                    }
+                    if (index === questionData.correct && userAnswer.selected !== questionData.correct) {
+                        optionElement.classList.add('correct');
+                    }
+                }
+                
+                optionElement.addEventListener('click', () => selectQuizOption(index));
+                elements.quizOptions.appendChild(optionElement);
+            });
+            
+            // Update button states
+            elements.quizPrev.disabled = appState.quiz.currentQuestion === 0;
+            elements.quizPrev.style.opacity = appState.quiz.currentQuestion === 0 ? '0.5' : '1';
+            
+            const isLastQuestion = appState.quiz.currentQuestion === appState.quiz.questions.length - 1;
+            elements.quizNext.textContent = isLastQuestion ? 'Finish Test' : 'Next Question';
+        }
+
+        function selectQuizOption(optionIndex) {
+            // Only allow selection if not already answered
+            if (appState.quiz.userAnswers[appState.quiz.currentQuestion]) return;
+            
+            const questionData = appState.quiz.questions[appState.quiz.currentQuestion];
+            const isCorrect = optionIndex === questionData.correct;
+            
+            // Store user answer
+            appState.quiz.userAnswers[appState.quiz.currentQuestion] = {
+                selected: optionIndex,
+                correct: isCorrect
+            };
             
             // Update score if correct
             if (isCorrect) {
-                quizScore++;
+                appState.quiz.score++;
             }
             
-            // Store user answer
-            userAnswers.push({
-                question: currentQuestion,
-                answer: selectedOption,
-                correct: isCorrect
+            // Update UI to show selection
+            const options = elements.quizOptions.querySelectorAll('.quiz-option');
+            options.forEach((option, index) => {
+                option.classList.remove('selected');
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                    if (isCorrect) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                    }
+                }
+                if (index === questionData.correct && !isCorrect) {
+                    option.classList.add('correct');
+                }
             });
             
-            // Move to next question or finish quiz
-            if (currentQuestion < 10) {
-                currentQuestion++;
-                updateQuizDisplay();
+            // Automatically move to next question after delay
+            setTimeout(() => {
+                if (appState.quiz.currentQuestion < appState.quiz.questions.length - 1) {
+                    appState.quiz.currentQuestion++;
+                    loadQuizQuestion();
+                } else {
+                    finishQuiz();
+                }
+            }, 1500);
+        }
+
+        function finishQuiz() {
+            // Calculate time spent
+            const endTime = new Date();
+            const timeDiff = (endTime - appState.quiz.startTime) / 1000; // in seconds
+            const minutes = Math.floor(timeDiff / 60);
+            const seconds = Math.floor(timeDiff % 60);
+            const timeFormatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Calculate score percentage
+            const scorePercentage = Math.round((appState.quiz.score / appState.quiz.questions.length) * 100);
+            
+            // Update results screen
+            elements.finalScore.textContent = `${scorePercentage}%`;
+            elements.correctAnswers.textContent = appState.quiz.score;
+            elements.totalQuestions.textContent = appState.quiz.questions.length;
+            elements.timeSpent.textContent = timeFormatted;
+            
+            // Update results text based on score
+            let resultsText = '';
+            let iconColor = '';
+            if (scorePercentage >= 80) {
+                resultsText = 'Excellent! You aced the test!';
+                iconColor = '#ffd166'; // Gold
+            } else if (scorePercentage >= 60) {
+                resultsText = 'Great job! You passed the test.';
+                iconColor = '#4ecdc4'; // Teal
+            } else {
+                resultsText = 'Keep practicing! You\'ll do better next time.';
+                iconColor = '#ff6b6b'; // Red
+            }
+            
+            elements.resultsText.textContent = resultsText;
+            elements.resultsIcon.style.background = `linear-gradient(135deg, ${iconColor}, ${iconColor}99)`;
+            
+            // Update user stats
+            appState.currentUser.stats.avgScore = Math.round(
+                (appState.currentUser.stats.avgScore + scorePercentage) / 2
+            );
+            appState.currentUser.stats.studyHours += 0.5; // Add 30 minutes for the test
+            
+            // Show results screen
+            showScreen('results');
+            showToast(`Test completed! You scored ${scorePercentage}%`, 'success');
+        }
+
+        // ========== FLASHCARD FUNCTIONS ==========
+        function updateFlashcard() {
+            const card = appState.flashcards.cards[appState.flashcards.currentIndex];
+            
+            elements.flashcardCategory.textContent = card.category;
+            elements.flashcardTerm.textContent = card.term;
+            elements.flashcardDefinition.textContent = card.definition;
+            elements.flashcardExample.textContent = card.example;
+            
+            // Reset card flip state
+            elements.flashcard.classList.remove('flipped');
+        }
+
+        function nextFlashcard() {
+            appState.flashcards.currentIndex++;
+            if (appState.flashcards.currentIndex >= appState.flashcards.cards.length) {
+                appState.flashcards.currentIndex = 0;
+                showToast('You\'ve reviewed all flashcards! Starting over.', 'info');
+            }
+            updateFlashcard();
+        }
+
+        function previousFlashcard() {
+            appState.flashcards.currentIndex--;
+            if (appState.flashcards.currentIndex < 0) {
+                appState.flashcards.currentIndex = appState.flashcards.cards.length - 1;
+            }
+            updateFlashcard();
+        }
+
+        // ========== EVENT LISTENERS ==========
+        // Navigation
+        elements.navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const screen = item.getAttribute('data-screen');
+                simulateLoading(() => showScreen(screen));
+            });
+        });
+
+        elements.profileButton.addEventListener('click', () => {
+            simulateLoading(() => showScreen('profile'));
+        });
+
+        elements.backFromProfile.addEventListener('click', () => {
+            simulateLoading(() => showScreen('dashboard'));
+        });
+
+        elements.backFromStudy.addEventListener('click', () => {
+            simulateLoading(() => showScreen('dashboard'));
+        });
+
+        elements.backFromProgress.addEventListener('click', () => {
+            simulateLoading(() => showScreen('dashboard'));
+        });
+
+        // Test buttons
+        elements.startMathTest.addEventListener('click', () => {
+            simulateLoading(() => startQuiz('math'), 500);
+        });
+
+        elements.startScienceTest.addEventListener('click', () => {
+            simulateLoading(() => startQuiz('science'), 500);
+        });
+
+        elements.startEnglishTest.addEventListener('click', () => {
+            simulateLoading(() => startQuiz('english'), 500);
+        });
+
+        // Quick actions
+        elements.quickFlashcards.addEventListener('click', () => {
+            simulateLoading(() => showScreen('flashcards'), 500);
+        });
+
+        elements.quickProgress.addEventListener('click', () => {
+            simulateLoading(() => showScreen('progress'), 500);
+        });
+
+        // Subject cards
+        elements.subjectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const subject = card.getAttribute('data-subject');
+                showToast(`Opening ${subject} study materials`, 'info');
+                simulateLoading(() => showScreen('study'), 500);
+            });
+        });
+
+        // See all buttons
+        elements.seeAllSubjects.addEventListener('click', () => {
+            showToast('Showing all subjects', 'info');
+            simulateLoading(() => showScreen('study'), 500);
+        });
+
+        elements.seeAllTests.addEventListener('click', () => {
+            showToast('Showing all available tests', 'info');
+            // In a real app, this would filter to show all tests
+        });
+
+        // Quiz navigation
+        elements.quizPrev.addEventListener('click', () => {
+            if (appState.quiz.currentQuestion > 0) {
+                appState.quiz.currentQuestion--;
+                loadQuizQuestion();
+            }
+        });
+
+        elements.quizNext.addEventListener('click', () => {
+            // Check if current question is answered
+            if (!appState.quiz.userAnswers[appState.quiz.currentQuestion]) {
+                showToast('Please select an answer before proceeding', 'error');
+                return;
+            }
+            
+            if (appState.quiz.currentQuestion < appState.quiz.questions.length - 1) {
+                appState.quiz.currentQuestion++;
+                loadQuizQuestion();
             } else {
                 finishQuiz();
             }
         });
-        
-        quizPrev.addEventListener('click', () => {
-            if (currentQuestion > 1) {
-                currentQuestion--;
-                updateQuizDisplay();
+
+        // Results screen buttons
+        elements.reviewTest.addEventListener('click', () => {
+            showToast('Review feature would show detailed answer explanations', 'info');
+            // In a real app, this would navigate to a review screen
+        });
+
+        elements.resultsHome.addEventListener('click', () => {
+            simulateLoading(() => showScreen('dashboard'), 500);
+        });
+
+        // Study screen cards
+        elements.studyCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const cardId = card.id;
+                let message = '';
                 
-                // Restore previous answer if exists
-                const prevAnswer = userAnswers.find(answer => answer.question === currentQuestion);
-                if (prevAnswer) {
-                    quizOptions.forEach(option => {
-                        if (option.getAttribute('data-option') === prevAnswer.answer) {
-                            option.classList.add('selected');
-                            selectedOption = prevAnswer.answer;
-                        }
-                    });
+                switch(cardId) {
+                    case 'flashcards':
+                        simulateLoading(() => showScreen('flashcards'), 500);
+                        return;
+                    case 'videoLessons':
+                        message = 'Opening video lessons library';
+                        break;
+                    case 'practiceQuestions':
+                        message = 'Loading practice questions database';
+                        break;
+                    case 'mockExams':
+                        message = 'Accessing mock exams';
+                        break;
                 }
+                
+                showToast(message, 'info');
+                simulateLoading(() => {
+                    // In a real app, this would navigate to the specific feature
+                    showToast(`${message} loaded successfully!`, 'success');
+                }, 1000);
+            });
+        });
+
+        // Recent study sessions
+        elements.recentAlgebra.addEventListener('click', () => {
+            showToast('Continuing Algebra study session', 'info');
+            simulateLoading(() => {
+                // In a real app, this would resume the study session
+                showScreen('dashboard');
+                showToast('Algebra session resumed', 'success');
+            }, 800);
+        });
+
+        elements.recentBiology.addEventListener('click', () => {
+            showToast('Reviewing Biology: Cell Structure', 'info');
+            simulateLoading(() => {
+                // In a real app, this would open the review
+                showScreen('dashboard');
+                showToast('Biology review loaded', 'success');
+            }, 800);
+        });
+
+        // Flashcard controls
+        elements.flashcard.addEventListener('click', () => {
+            elements.flashcard.classList.toggle('flipped');
+        });
+
+        elements.flashcardFlip.addEventListener('click', () => {
+            elements.flashcard.classList.toggle('flipped');
+        });
+
+        elements.flashcardAgain.addEventListener('click', () => {
+            showToast('Card marked for review', 'info');
+            // In a real app, this would mark the card for repetition
+        });
+
+        elements.flashcardNext.addEventListener('click', () => {
+            nextFlashcard();
+        });
+
+        // Profile menu items
+        elements.editProfile.addEventListener('click', () => {
+            showToast('Edit Profile feature would open here', 'info');
+        });
+
+        elements.studyHistory.addEventListener('click', () => {
+            showToast('Loading study history...', 'info');
+            simulateLoading(() => {
+                showToast('Study history loaded', 'success');
+            }, 800);
+        });
+
+        elements.achievements.addEventListener('click', () => {
+            showToast('Opening achievements panel', 'info');
+            simulateLoading(() => {
+                showToast('You have 12 achievements unlocked!', 'success');
+            }, 800);
+        });
+
+        elements.notifications.addEventListener('click', () => {
+            showToast('You have 3 unread notifications', 'info');
+            // In a real app, this would show notifications
+        });
+
+        elements.settings.addEventListener('click', () => {
+            showToast('Opening app settings', 'info');
+            // In a real app, this would open settings
+        });
+
+        elements.helpSupport.addEventListener('click', () => {
+            showToast('Opening help & support', 'info');
+            // In a real app, this would open help
+        });
+
+        elements.logout.addEventListener('click', () => {
+            if (confirm('Are you sure you want to log out?')) {
+                simulateLoading(() => {
+                    showToast('You have been logged out successfully', 'success');
+                    // In a real app, this would navigate to login screen
+                    setTimeout(() => {
+                        showScreen('dashboard');
+                    }, 1000);
+                }, 800);
             }
         });
-        
-        function updateQuizDisplay() {
-            // Update question counter
-            document.querySelector('.quiz-header div').textContent = `Question ${currentQuestion}/10`;
-            
-            // Update progress bar
-            const progressPercentage = (currentQuestion / 10) * 100;
-            quizProgressBar.style.width = `${progressPercentage}%`;
-            
-            // Update question and options (in a real app, this would come from a data source)
-            const questions = [
-                "If 2x + 5 = 15, what is the value of x?",
-                "What is the square root of 144?",
-                "Solve for y: 3y - 7 = 20",
-                "What is 15% of 200?",
-                "Simplify: (2x²)(3x³)",
-                "What is the area of a circle with radius 5?",
-                "Solve the equation: 4(x - 3) = 20",
-                "What is the slope of the line passing through points (2,3) and (4,7)?",
-                "Factor: x² - 9",
-                "What is the value of 5! (5 factorial)?"
-            ];
-            
-            const options = [
-                ["x = 3", "x = 5", "x = 7", "x = 10"],
-                ["10", "11", "12", "13"],
-                ["y = 7", "y = 8", "y = 9", "y = 10"],
-                ["15", "20", "30", "45"],
-                ["5x⁵", "6x⁵", "6x⁶", "5x⁶"],
-                ["25π", "10π", "20π", "15π"],
-                ["x = 5", "x = 6", "x = 7", "x = 8"],
-                ["1", "2", "3", "4"],
-                ["(x-3)(x+3)", "(x-9)(x+1)", "(x-3)²", "(x+3)²"],
-                ["20", "60", "120", "150"]
-            ];
-            
-            const correctAnswers = ["B", "C", "C", "C", "B", "A", "D", "B", "A", "C"];
-            
-            // Update question
-            document.getElementById('quizQuestion').textContent = questions[currentQuestion - 1];
-            
-            // Update options
-            quizOptions.forEach((option, index) => {
-                option.textContent = options[currentQuestion - 1][index];
-                option.classList.remove('selected', 'correct', 'incorrect');
-            });
-            
-            // Reset selected option
-            selectedOption = null;
-            
-            // Update correct answer for current question
-            correctAnswer = correctAnswers[currentQuestion - 1];
-        }
-        
-        function resetQuizOptions() {
-            quizOptions.forEach(option => {
-                option.classList.remove('selected', 'correct', 'incorrect');
-            });
-            selectedOption = null;
-        }
-        
-        function finishQuiz() {
-            // Calculate final score
-            const scorePercentage = Math.round((quizScore / 10) * 100);
-            
-            // Update results screen
-            finalScore.textContent = `${scorePercentage}%`;
-            correctAnswers.textContent = quizScore;
-            totalQuestions.textContent = "10";
-            
-            // Show results screen
-            showScreen('results');
-        }
-        
-        // Results screen buttons
-        reviewTest.addEventListener('click', () => {
-            alert('In the full app, this would show a detailed review of all questions and answers.');
-        });
-        
-        resultsHome.addEventListener('click', () => {
-            showScreen('dashboard');
-        });
-        
-        // Study screen cards
-        studyCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const cardId = this.id;
-                alert(`Opening ${cardId.replace(/([A-Z])/g, ' $1').trim()} feature. In the full app, this would navigate to the corresponding study module.`);
-            });
-        });
-        
-        // Profile menu items
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const itemId = this.id;
-                
-                switch(itemId) {
-                    case 'editProfile':
-                        alert('Edit Profile feature would open here in the full app.');
-                        break;
-                    case 'studyHistory':
-                        alert('Study History would show all your past study sessions.');
-                        break;
-                    case 'achievements':
-                        alert('Achievements screen would show your badges and accomplishments.');
-                        break;
-                    case 'settings':
-                        alert('App Settings would open here.');
-                        break;
-                    case 'logout':
-                        if (confirm('Are you sure you want to log out?')) {
-                            alert('You have been logged out. Returning to login screen.');
-                            // In a real app, this would navigate to login
-                        }
-                        break;
-                }
-            });
-        });
-        
+
         // Search functionality
-        searchInput.addEventListener('keyup', function(e) {
+        elements.searchInput.addEventListener('keyup', function(e) {
             if (e.key === 'Enter') {
                 const searchTerm = this.value.trim();
                 if (searchTerm) {
-                    alert(`Searching for: "${searchTerm}". In the full app, this would display search results.`);
+                    showToast(`Searching for: "${searchTerm}"`, 'info');
+                    simulateLoading(() => {
+                        showToast(`Found 15 results for "${searchTerm}"`, 'success');
+                        this.value = '';
+                    }, 800);
                 }
             }
         });
-        
-        // "See All" buttons
-        document.getElementById('seeAllSubjects').addEventListener('click', () => {
-            alert('Showing all subjects. In the full app, this would navigate to the full subjects list.');
-        });
-        
-        document.getElementById('seeAllTests').addEventListener('click', () => {
-            alert('Showing all tests. In the full app, this would navigate to the full tests library.');
-        });
-        
-        // Subject card clicks
-        document.querySelectorAll('.subject-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const subject = this.getAttribute('data-subject');
-                alert(`Opening ${subject} study materials. In the full app, this would navigate to the subject dashboard.`);
+
+        // Stat cards
+        elements.statCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const statId = card.id;
+                let message = '';
+                
+                switch(statId) {
+                    case 'statStudyHours':
+                        message = 'Viewing detailed study hours breakdown';
+                        break;
+                    case 'statAvgScore':
+                        message = 'Viewing score history and trends';
+                        break;
+                    case 'statTopics':
+                        message = 'Viewing all covered topics';
+                        break;
+                    case 'statStreak':
+                        message = 'Viewing streak calendar and history';
+                        break;
+                }
+                
+                showToast(message, 'info');
             });
         });
-        
-        // Initialize app
+
+        // Progress detail cards
+        document.querySelectorAll('.detail-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const cardId = card.id;
+                let message = '';
+                
+                switch(cardId) {
+                    case 'detailTopics':
+                        message = 'Viewing detailed topic breakdown';
+                        break;
+                    case 'detailHours':
+                        message = 'Viewing study hours distribution';
+                        break;
+                    case 'detailTests':
+                        message = 'Viewing test history and results';
+                        break;
+                    case 'detailStreak':
+                        message = 'Viewing streak details and milestones';
+                        break;
+                }
+                
+                showToast(message, 'info');
+            });
+        });
+
+        // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the app
             showScreen('dashboard');
+            
+            // Show welcome message
+            setTimeout(() => {
+                showToast('Welcome to ExamPrep Pro! Ready to study?', 'success');
+            }, 1000);
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Escape key goes back to dashboard
+                if (e.key === 'Escape' && appState.currentScreen !== 'dashboard') {
+                    showScreen('dashboard');
+                }
+                
+                // Number keys 1-4 for navigation
+                if (e.key >= '1' && e.key <= '4' && !e.ctrlKey && !e.altKey) {
+                    const screens = ['dashboard', 'study', 'progress', 'profile'];
+                    const index = parseInt(e.key) - 1;
+                    if (screens[index]) {
+                        showScreen(screens[index]);
+                    }
+                }
+            });
         });
     </script>
 </body>
